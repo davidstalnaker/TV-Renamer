@@ -145,7 +145,9 @@ NSString * const API_KEY = @"24D2CC2A705A1123";
 							   API_KEY, showID, season, episode];
 		NSURL *url = [NSURL URLWithString:urlString];
 		NSXMLDocument *doc = [self requestXMLfromURL:url];
-		self.episodeName = [self stringForPath:@"Data/Episode/EpisodeName" ofNode:doc];
+		if(doc) {
+			self.episodeName = [self stringForPath:@"Data/Episode/EpisodeName" ofNode:doc];
+		}
 		NSLog(@"%@", episodeName);
 	}
 }
@@ -181,7 +183,6 @@ NSString * const API_KEY = @"24D2CC2A705A1123";
 		NSLog(@"Error getting URL data: %@", error);
 		return nil;
 	}
-	NSLog(@"%@", urlData);
 	
 	doc = [[NSXMLDocument alloc] initWithData:urlData 
 									  options:0 
@@ -189,6 +190,7 @@ NSString * const API_KEY = @"24D2CC2A705A1123";
 	
 	if(!doc) {
 		NSLog(@"Error creating XML document: %@", error);
+		return nil;
 	}
 	return doc;
 }
