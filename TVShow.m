@@ -153,17 +153,17 @@ NSString * const API_KEY = @"24D2CC2A705A1123";
 }
 
 - (void)generateFinalFileName {
+	NSString *extension = [[initFileName componentsSeparatedByString:@"."] lastObject];
 	if(show) {
 		if(episodeName) {
-			self.finalFileName = [NSString stringWithFormat:@"%@ - S%02dE%02d - %@.mkv", show, season, episode, episodeName];
+			self.finalFileName = [NSString stringWithFormat:@"%@ - S%02dE%02d - %@.%@", 
+								  show, season, episode, episodeName, extension];
 		}
 		else {
-			self.finalFileName = [NSString stringWithFormat:@"%@ - S%02dE%02d.mkv", show, season, episode];
+			self.finalFileName = [NSString stringWithFormat:@"%@ - S%02dE%02d.%@", 
+								  show, season, episode, extension];
 		}
 	}
-	
-	
-	
 }
 
 - (NSXMLDocument *)requestXMLfromURL:(NSURL *)url {
