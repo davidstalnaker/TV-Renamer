@@ -36,6 +36,7 @@ extern NSString * const API_KEY;
 - (void)lookupShow;
 - (void)lookupEpisodeName;
 - (void)generateFinalFileName;
+- (void)renameFile;
 - (NSXMLDocument *)requestXMLfromURL:(NSURL *)url;
 - (NSString *)stringForPath:(NSString *)xp ofNode:(NSXMLNode *)n;
 

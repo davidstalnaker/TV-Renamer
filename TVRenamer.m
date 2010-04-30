@@ -18,13 +18,7 @@
 	NSLog(@"[MyDocument init]");
     self = [super init];
     if (self) {
-		fileNames = [[NSMutableArray alloc] init];
-		
-		TVShow * tvshow = [[TVShow alloc] init];
-		tvshow.initFileName = @"blah.mkv";
-		tvshow.finalFileName = @"Blahblah.mkv";
-		[fileNames addObject:tvshow];
-		
+		fileNames = [[NSMutableArray alloc] init];		
     }
     return self;
 }
@@ -35,7 +29,7 @@
 
 - (IBAction) renameFiles:(id)sender {
 	for(TVShow *show in fileNames) {
-		NSLog(@"Episode Name: %@", show.episodeName);
+		[show renameFile];
 	}
 	
 }

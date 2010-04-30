@@ -164,6 +164,19 @@ NSString * const API_KEY = @"24D2CC2A705A1123";
 								  show, season, episode, extension];
 		}
 	}
+	self.finalFile = [[initFile stringByDeletingLastPathComponent] stringByAppendingPathComponent:finalFileName];
+}
+
+- (void)renameFile {
+	NSError *error;
+	[[NSFileManager defaultManager] moveItemAtPath:initFile 
+											toPath:finalFile 
+											 error:&error];
+	
+	if(error) {
+		NSLog(@"Error moving file (%@): %@", initFileName, error);
+	}
+	
 }
 
 - (NSXMLDocument *)requestXMLfromURL:(NSURL *)url {
