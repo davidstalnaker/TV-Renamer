@@ -93,7 +93,7 @@ NSString * const API_KEY = @"24D2CC2A705A1123";
 	
 	// Regex search for a season and episode number
 	NSMutableString *showGuess = [[NSMutableString alloc] init];
-	NSString *regex = @"[Ss]?(\\d+)[EeXx](\\d+)";
+	NSString *regex = @"[sS]?((?:\\d{1,2}(?=[eExX]))?(?:\\d{1,2}(?=\\d{2}))?)[eExX]?(\\d{2})";
 	for(NSString *part in fileNameParts) {
 		BOOL found = [part isMatchedByRegex:regex];
 		NSLog(@"Looking in %@", part);
@@ -168,14 +168,10 @@ NSString * const API_KEY = @"24D2CC2A705A1123";
 }
 
 - (void)renameFile {
-	NSError *error;
-	[[NSFileManager defaultManager] moveItemAtPath:initFile 
-											toPath:finalFile 
-											 error:&error];
+	[[NSFileManager defaultManager] moveItemAtPath:self.initFile 
+											toPath:self.finalFile 
+											 error:nil];
 	
-	if(error) {
-		NSLog(@"Error moving file (%@): %@", initFileName, error);
-	}
 	
 }
 
