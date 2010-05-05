@@ -12,6 +12,7 @@
 		631F13E21181697900D5B3CE /* RegexKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 631F13E11181697900D5B3CE /* RegexKit.framework */; };
 		631F13E9118169F800D5B3CE /* RegexKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 631F13E11181697900D5B3CE /* RegexKit.framework */; };
 		632229DE117196930002C1E4 /* TVShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 632229DD117196930002C1E4 /* TVShow.m */; };
+		63CAE2051191519B00AAD716 /* tv.icns in Resources */ = {isa = PBXBuildFile; fileRef = 63CAE2041191519B00AAD716 /* tv.icns */; };
 		63E85017116867B1003553BB /* TVRenamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E85016116867B1003553BB /* TVRenamer.m */; };
 		63EAA40A11790A830087D756 /* addFileImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 63EAA40711790A830087D756 /* addFileImage.icns */; };
 		63EAA40B11790A830087D756 /* removeFileImage.icns in Resources */ = {isa = PBXBuildFile; fileRef = 63EAA40811790A830087D756 /* removeFileImage.icns */; };
@@ -48,6 +49,7 @@
 		631F13E11181697900D5B3CE /* RegexKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RegexKit.framework; path = Local/Frameworks/RegexKit.framework; sourceTree = DEVELOPER_DIR; };
 		632229DC117196930002C1E4 /* TVShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVShow.h; sourceTree = "<group>"; };
 		632229DD117196930002C1E4 /* TVShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVShow.m; sourceTree = "<group>"; };
+		63CAE2041191519B00AAD716 /* tv.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = tv.icns; sourceTree = "<group>"; };
 		63E85015116867B1003553BB /* TVRenamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVRenamer.h; sourceTree = "<group>"; };
 		63E85016116867B1003553BB /* TVRenamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVRenamer.m; sourceTree = "<group>"; };
 		63EAA40711790A830087D756 /* addFileImage.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = addFileImage.icns; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				63CAE2041191519B00AAD716 /* tv.icns */,
 				63EAA40711790A830087D756 /* addFileImage.icns */,
 				63EAA40811790A830087D756 /* removeFileImage.icns */,
 				63EAA40911790A830087D756 /* renameIcon.tiff */,
@@ -202,6 +205,7 @@
 				63EAA40A11790A830087D756 /* addFileImage.icns in Resources */,
 				63EAA40B11790A830087D756 /* removeFileImage.icns in Resources */,
 				63EAA40C11790A830087D756 /* renameIcon.tiff in Resources */,
+				63CAE2051191519B00AAD716 /* tv.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
