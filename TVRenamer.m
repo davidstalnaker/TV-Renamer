@@ -15,7 +15,6 @@
 
 - (id)init
 {
-	NSLog(@"[MyDocument init]");
     self = [super init];
     if (self) {
 		fileNames = [[NSMutableArray alloc] init];		

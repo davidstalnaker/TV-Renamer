@@ -15,7 +15,7 @@
 @synthesize initFile;
 @synthesize finalFile;
 @synthesize initFileName;
-@synthesize finalFileName;
+@synthesize finalFileName; 
 @synthesize show;
 @synthesize episodeName;
 @synthesize showID;
@@ -87,24 +87,17 @@ NSString * const API_KEY = @"24D2CC2A705A1123";
 											 stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
 	}
 	
-	for(int i = 0; i < [fileNameParts count]; i++) {
-		NSLog(@"%@", [fileNameParts objectAtIndex:i]);
-	}
-	
 	// Regex search for a season and episode number
 	NSMutableString *showGuess = [[NSMutableString alloc] init];
 	NSString *regex = @"[sS]?(\\d{1,2}(?=[eExX]|\\d{2}))[eExX]?(\\d{1,2})";
 	for(NSString *part in fileNameParts) {
 		BOOL found = [part isMatchedByRegex:regex];
-		NSLog(@"Looking in %@", part);
 		if (found) {
-			NSLog(@"Found it in %@", part);
 			NSString *seasonStr;
 			NSString *episodeStr;
 			[part getCapturesWithRegexAndReferences:regex, @"$1", &seasonStr, @"$2", &episodeStr, nil];
 			self.season = [seasonStr intValue];
 			self.episode = [episodeStr intValue];
-			NSLog(@"Season %d, Episode %d", season, episode);
 			break;
 		}
 		else {
@@ -113,7 +106,6 @@ NSString * const API_KEY = @"24D2CC2A705A1123";
 	}
 	// All parts of the filename before the season and episode are in the season name (hopefully)
 	[self.showGuesses addObject:[showGuess stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
-	NSLog(@"%@", showGuesses);
 }
 
 
@@ -133,7 +125,6 @@ NSString * const API_KEY = @"24D2CC2A705A1123";
 		self.showID = [[self stringForPath:@"Data/Series/seriesid"
 							   ofNode:doc] intValue];
 		
-		NSLog(@"Show: %@, ID: %d", show, showID);
 		
 	}
 }
@@ -148,7 +139,6 @@ NSString * const API_KEY = @"24D2CC2A705A1123";
 		if(doc) {
 			self.episodeName = [self stringForPath:@"Data/Episode/EpisodeName" ofNode:doc];
 		}
-		NSLog(@"%@", episodeName);
 	}
 }
 
@@ -216,7 +206,6 @@ NSString * const API_KEY = @"24D2CC2A705A1123";
 	if([nodes count] > 0) {
 		ret = [[nodes objectAtIndex:0] stringValue];
 	}
-	NSLog(@"String for path \"%@\" is \"%@\"", xp, ret);
 	return ret;
 }
 
