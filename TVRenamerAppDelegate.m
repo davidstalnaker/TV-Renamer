@@ -11,13 +11,25 @@
 @implementation TVRenamerAppDelegate
 
 @synthesize window;
+@synthesize renamer;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	// Insert code here to initialize your application 
 }
 
-- (BOOL) applicationShouldTerminateAfterLastWindowClosed: (NSApplication *) theApplication {
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed: (NSApplication *) theApplication {
 	return YES;
+}
+
+- (BOOL)application: (NSApplication *) app openFile:(NSString *) file {
+	[renamer addFileToList:file];
+	return YES;
+}
+
+- (void)application:(NSApplication *)sender openFiles:(NSArray *)filenames {
+	for (NSString* file in filenames) {
+		[renamer addFileToList:file];
+	}
 }
 
 @end

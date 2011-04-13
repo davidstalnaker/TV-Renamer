@@ -7,11 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "TVRenamer.h"
 
 @interface TVRenamerAppDelegate : NSObject <NSApplicationDelegate> {
     NSWindow *window;
+	TVRenamer *renamer;
 }
 
 @property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet TVRenamer *renamer;
 
 @end

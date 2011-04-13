@@ -33,6 +33,15 @@
 	
 }
 
+- (void)addFileToList:(NSString *)file {
+	TVShow *thisShow = [[TVShow alloc] initWithFile: file];
+	[thisShow parseFileName];
+	[thisShow lookupShow];
+	[thisShow lookupEpisodeName];
+	[thisShow generateFinalFileName];
+	[arrayController addObject:thisShow];
+}
+
 - (NSDragOperation)tableView:(NSTableView*)tv 
 				validateDrop:(id <NSDraggingInfo>)info 
 				 proposedRow:(NSInteger)row 
@@ -53,12 +62,7 @@
 	unsigned i = [files count];
 	while (i-- > 0) {
 		NSString *file = [files objectAtIndex:i];
-		TVShow *thisShow = [[TVShow alloc] initWithFile: file];
-		[thisShow parseFileName];
-		[thisShow lookupShow];
-		[thisShow lookupEpisodeName];
-		[thisShow generateFinalFileName];
-		[arrayController addObject:thisShow];
+		[self addFileToList: file];
 		loaded = YES;
 	}
 	return loaded;

@@ -16,6 +16,8 @@
 	IBOutlet NSArrayController *arrayController;
 }
 
+- (void)addFileToList:(NSString *)file;
+
 - (IBAction) renameFiles:(id)sender;
 - (NSDragOperation)tableView:(NSTableView*)tv 
 				validateDrop:(id <NSDraggingInfo>)info 
