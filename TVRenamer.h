@@ -8,10 +8,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import "TVShow.h"
+#import <dispatch/dispatch.h>
 
 
 @interface TVRenamer : NSObject {
 	NSMutableArray *fileNames;
+	NSOperationQueue *queue;
 	IBOutlet NSTableView *tableView;
 	IBOutlet NSArrayController *arrayController;
 }
@@ -29,5 +31,6 @@
 	dropOperation:(NSTableViewDropOperation)operation;
 
 @property(readwrite, copy) NSMutableArray *fileNames;
+@property(readwrite, copy) NSOperationQueue *queue;
 
 @end

@@ -12,12 +12,14 @@
 @implementation TVRenamer
 
 @synthesize fileNames;
+@synthesize queue;
 
 - (id)init
 {
     self = [super init];
     if (self) {
-		fileNames = [[NSMutableArray alloc] init];		
+		fileNames = [[NSMutableArray alloc] init];
+		queue = [[NSOperationQueue alloc] init];
     }
     return self;
 }
@@ -27,19 +29,22 @@
 }
 
 - (IBAction) renameFiles:(id)sender {
-	for(TVShow *show in fileNames) {
-		[show renameFile];
-	}
-	
+	[queue addOperation: [NSBlockOperation blockOperationWithBlock:^{
+		for(TVShow *show in fileNames) {
+			[show renameFile];
+		}
+	}]];
 }
 
 - (void)addFileToList:(NSString *)file {
-	TVShow *thisShow = [[TVShow alloc] initWithFile: file];
-	[thisShow parseFileName];
-	[thisShow lookupShow];
-	[thisShow lookupEpisodeName];
-	[thisShow generateFinalFileName];
-	[arrayController addObject:thisShow];
+	[queue addOperation: [NSBlockOperation blockOperationWithBlock:^{
+		TVShow *thisShow = [[TVShow alloc] initWithFile: file];
+		[thisShow parseFileName];
+		[thisShow lookupShow];
+		[thisShow lookupEpisodeName];
+		[thisShow generateFinalFileName];
+		[arrayController addObject:thisShow];
+	}]];
 }
 
 - (NSDragOperation)tableView:(NSTableView*)tv 
