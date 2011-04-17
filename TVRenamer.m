@@ -37,13 +37,13 @@
 }
 
 - (void)addFileToList:(NSString *)file {
+	TVShow *thisShow = [[TVShow alloc] initWithFile: file];
+	[thisShow parseFileName];
+	[arrayController addObject:thisShow];
 	[queue addOperation: [NSBlockOperation blockOperationWithBlock:^{
-		TVShow *thisShow = [[TVShow alloc] initWithFile: file];
-		[thisShow parseFileName];
 		[thisShow lookupShow];
 		[thisShow lookupEpisodeName];
 		[thisShow generateFinalFileName];
-		[arrayController addObject:thisShow];
 	}]];
 }
 
