@@ -41,7 +41,6 @@
 	[thisShow parseFileName];
 	[arrayController addObject:thisShow];
 	[queue addOperation: [NSBlockOperation blockOperationWithBlock:^{
-		[thisShow lookupShow];
 		[thisShow lookupEpisodeName];
 		[thisShow generateFinalFileName];
 	}]];

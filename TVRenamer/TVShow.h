@@ -5,15 +5,14 @@
 //  Created by David Stalnaker on 4/11/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
-
+#define restrict
 #import <Cocoa/Cocoa.h>
 #import <RegexKit/RegexKit.h>
-
-extern NSString * const API_KEY;
+#import <TVDBApi/TVDBApi.h>
 
 @interface TVShow : NSObject {
 	
-	
+	TVDBApi *api;
 	NSString *initFile;
 	NSString *finalFile;
 	
@@ -37,8 +36,6 @@ extern NSString * const API_KEY;
 - (void)lookupEpisodeName;
 - (void)generateFinalFileName;
 - (void)renameFile;
-- (NSXMLDocument *)requestXMLfromURL:(NSURL *)url;
-- (NSString *)stringForPath:(NSString *)xp ofNode:(NSXMLNode *)n;
 
 @property (copy) NSString *initFile;
 @property (copy) NSString *finalFile;

@@ -23,13 +23,12 @@
 @synthesize season;
 @synthesize episode;
 
-NSString * const API_KEY = @"24D2CC2A705A1123";
-
 #pragma mark -
 #pragma mark Initialization Methods
 
 - (id) init {
 	[super init];
+	api = [TVDBApi sharedTVDBApi];
 	self.initFileName = @"";
 	self.finalFileName = @"";
 	self.showGuesses = [[NSMutableArray alloc] init];
@@ -39,6 +38,7 @@ NSString * const API_KEY = @"24D2CC2A705A1123";
 - (id) initWithFile: (NSString*)file {
 	[super init];
 	
+	api = [TVDBApi sharedTVDBApi];
 	self.initFile = file;
 	self.finalFile = file;
 	self.initFileName = [file lastPathComponent];
@@ -109,36 +109,16 @@ NSString * const API_KEY = @"24D2CC2A705A1123";
 }
 
 
-- (void)lookupShow{
-	for(NSString *guess in showGuesses) {
-		guess = [guess stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-		NSString *urlString = [NSString stringWithFormat:
-							   @"http://thetvdb.com/api/GetSeries.php?seriesname=%@",
-							   guess];
-		NSURL *url = [NSURL URLWithString:urlString];
-		
-		NSXMLDocument *doc = [self requestXMLfromURL:url];
-		
-		self.show = [self stringForPath:@"Data/Series/SeriesName"
-							ofNode:doc];
-		
-		self.showID = [[self stringForPath:@"Data/Series/seriesid"
-							   ofNode:doc] intValue];
-		
-		
-	}
-}
-
 - (void)lookupEpisodeName{
-	if(showID) {
-		NSString *urlString = [NSString stringWithFormat:
-							   @"http://thetvdb.com/api/%@/series/%d/default/%d/%d/en.xml",
-							   API_KEY, showID, season, episode];
-		NSURL *url = [NSURL URLWithString:urlString];
-		NSXMLDocument *doc = [self requestXMLfromURL:url];
-		if(doc) {
-			self.episodeName = [self stringForPath:@"Data/Episode/EpisodeName" ofNode:doc];
-		}
+	NSLog(@"Guesses: %@ %ld %ld", [showGuesses objectAtIndex:0], season, episode);
+	NSArray *episodes = [api episodesWithSeriesName:[showGuesses objectAtIndex:0] 
+											 season:season 
+											episode:episode 
+										useDvdOrder:YES];
+	NSLog(@"Found %lu", [episodes count]);
+	for (TVDBEpisode *ep in episodes) {
+		self.show = ep.series.name;
+		self.episodeName = ep.title;
 	}
 }
 
@@ -163,50 +143,6 @@ NSString * const API_KEY = @"24D2CC2A705A1123";
 											 error:nil];
 	
 	
-}
-
-- (NSXMLDocument *)requestXMLfromURL:(NSURL *)url {
-	
-	NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-	NSData *urlData;
-	NSURLResponse *response;
-	NSError *error;
-	NSXMLDocument *doc;
-	
-	// Send the request
-	urlData = [NSURLConnection sendSynchronousRequest:urlRequest
-									returningResponse:&response 
-												error:&error];
-	
-	if(!urlData) {
-		NSLog(@"Error getting URL data: %@", error);
-		return nil;
-	}
-	
-	doc = [[NSXMLDocument alloc] initWithData:urlData 
-									  options:0 
-										error:&error];
-	
-	if(!doc) {
-		NSLog(@"Error creating XML document: %@", error);
-		return nil;
-	}
-	return doc;
-}
-
-- (NSString *)stringForPath:(NSString *)xp ofNode:(NSXMLNode *)n {
-	NSString *ret = nil;
-	NSError *error;		
-	NSArray *nodes = [n nodesForXPath:xp
-								error:&error];
-	if(!nodes) {
-		NSLog(@"%@", error);
-	}
-	
-	if([nodes count] > 0) {
-		ret = [[nodes objectAtIndex:0] stringValue];
-	}
-	return ret;
 }
 
 @end
